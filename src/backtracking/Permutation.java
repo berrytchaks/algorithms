@@ -15,12 +15,9 @@ import java.util.Map;
 public class Permutation
 {
 	private Map<Character,Integer> indexes = new HashMap<>();
-//	private char[] indexes2;
 	public Permutation(String str){
-//		indexes2 = new char[str.length()];
 		for (int i =0; i < str.length(); i++){
         	indexes.put(str.charAt(i),i);
-//        	indexes2[i] = str.charAt(i);
         }
 	}
     public static void main(String[] args)
