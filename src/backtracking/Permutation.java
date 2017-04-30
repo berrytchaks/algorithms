@@ -41,14 +41,6 @@ public class Permutation
         	for (int i =0;i < str.length();i++){
         		System.out.print(indexes.get(str.charAt(i)));
         	}
-//        	System.out.print(" ");
-//        	for (int i =0;i < str.length();i++){
-//        		for(int j =0; j< str.length();j++){
-//        			if (str.charAt(i) == indexes2[j]){
-//        				System.out.print(j);
-//        			}
-//        		}
-//        	}
         	System.out.println();
         }
         else
@@ -56,9 +48,7 @@ public class Permutation
             for (int i = l; i <= r; i++)
             {
                 str = swap(str,l,i);
-//                System.out.println("str1 ="+str+" l="+l+" i="+i);
                 permute(str, l+1, r);
-//                str = swap(str,l,i);
             }
         }
     }
