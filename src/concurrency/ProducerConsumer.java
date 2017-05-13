@@ -11,7 +11,7 @@ public class ProducerConsumer {
 
     static Monitor monitor;
     int n;
-    int maxSize;
+	int maxSize;
 
     public ProducerConsumer(int maxSize)
     {
@@ -36,6 +36,14 @@ public class ProducerConsumer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+//                finally{
+//                	try {
+//						Thread.sleep(500);
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//                }
             }
         }
     }
@@ -56,38 +64,39 @@ public class ProducerConsumer {
     }
 
      class Monitor {
-
-//          int n;
-//          int maxSize;
-//
-//         public Monitor(int maxSize)
-//         {
-//             n=0;
-//             this.maxSize = maxSize;
-//         }
          public Monitor(){}
 
         synchronized void insert() throws InterruptedException 
         {
-            while(n==maxSize)
+            while(n==maxSize){
+            	System.out.println("Buffer full producers sleep");
                 wait();
-            System.out.println("Producer: "+n++);
-            if(n==1)
+            }
+            n++;
+            System.out.println("Producer: "+n);
+            if(n==1){
+            	System.out.println("An item present Awake consumers");
                 notifyAll();
+            }
         }
 
         synchronized void remove() throws InterruptedException 
         {
-        	while(n==0)
-                wait();
-            System.out.println("Consumer: "+n--);
-            if(n==maxSize-1)
+        	while(n==0){
+        		System.out.println("Buffer empty consumers sleep");
+        		wait();
+        	}
+        	n--;
+            System.out.println("Consumer: "+n);
+            if(n==maxSize-1){
+            	System.out.println("Cell empty Awake producers");
                 notifyAll();
+            }
         }
     }
 
     public static void main(String[] args) {
-        ProducerConsumer pc = new ProducerConsumer(100);
+        ProducerConsumer pc = new ProducerConsumer(10);
 
     }
 }
